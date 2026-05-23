@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyderabad & Gachibowli — Deep Weather Intelligence Report 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #060e1f;
+    --deep: #0b1829;
+    --panel: #0f2137;
+    --panel2: #132840;
+    --amber: #f5a623;
+    --amber-light: #ffcc5a;
+    --fire: #e84545;
+    --cyan: #00d4ff;
+    --teal: #00b4a6;
+    --green: #38d9a9;
+    --rain: #4da6ff;
+    --rain-dark: #1e6fbf;
+    --text: #e8f0fa;
+    --muted: #8ca0bc;
+    --border: rgba(255,255,255,0.06);
+    --glow-amber: 0 0 40px rgba(245,166,35,0.25);
+    --glow-rain: 0 0 40px rgba(77,166,255,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── ANIMATED BG ─────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(ellipse 60% 50% at 15% 20%, rgba(245,166,35,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 85% 70%, rgba(0,212,255,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 50% 90%, rgba(0,180,166,0.05) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  .hero {
+    position: relative; z-index: 1;
+    padding: 80px 60px 60px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(11,24,41,0.9) 0%, transparent 100%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 4px;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--amber);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 88px);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: -2px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 span {
+    color: var(--amber);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 15px; color: var(--muted);
+    margin-top: 20px; max-width: 680px;
+    font-weight: 300;
+  }
+
+  .hero-stats {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    margin-top: 48px;
+  }
+
+  .hstat {
+    position: relative;
+    padding: 20px 28px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    border-radius: 4px;
+    min-width: 140px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s;
+  }
+  .hstat:hover { border-color: rgba(245,166,35,0.4); box-shadow: var(--glow-amber); }
+
+  .hstat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 700;
+    line-height: 1;
+    color: #fff;
+  }
+  .hstat-val .unit {
+    font-size: 16px; color: var(--amber); font-weight: 400;
+  }
+  .hstat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--muted); text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ─── LAYOUT ─────────────────────────────────── */
+  .container {
+    max-width: 1360px; margin: 0 auto;
+    padding: 0 60px;
+    position: relative; z-index: 1;
+  }
+
+  .section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 4px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+  .section-tag::before {
+    content: '◆';
+    font-size: 7px;
+  }
+
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .section-desc {
+    color: var(--muted);
+    max-width: 700px;
+    font-size: 14px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  /* ─── MONTH GRID ─────────────────────────────── */
+  .months-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .month-card {
+    padding: 20px 16px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .month-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--bar-color, var(--amber));
+    transform: scaleX(var(--bar-scale, 0.3));
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .month-card:hover {
+    background: var(--panel2);
+    transform: translateY(-2px);
+    z-index: 2;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .month-card:hover::after { transform: scaleX(1); }
+
+  .month-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .month-temp-high {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+  .month-temp-low {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--rain);
+    margin-top: 4px;
+  }
+
+  .month-rain {
+    margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .month-season-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    margin-top: 10px;
+  }
+
+  .badge-winter  { background: rgba(77,166,255,0.15); color: var(--rain); }
+  .badge-summer  { background: rgba(232,69,69,0.15);  color: var(--fire); }
+  .badge-monsoon { background: rgba(0,180,166,0.15);  color: var(--teal); }
+  .badge-post    { background: rgba(245,166,35,0.15); color: var(--amber); }
+
+  /* ─── RAINFALL CHART ─────────────────────────── */
+  .chart-container {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 40px;
+    margin-top: 0;
+  }
+
+  .chart-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .chart-legend {
+    display: flex; gap: 20px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 10px;
+  }
+  .legend-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+
+  .bar-chart {
+    display: flex; align-items: flex-end;
+    gap: 8px; height: 200px;
+    padding-top: 20px;
+  }
+
+  .bar-group {
+    flex: 1; display: flex;
+    flex-direction: column; align-items: center;
+    gap: 4px; height: 100%;
+    justify-content: flex-end;
+  }
+
+  .bar-rainfall {
+    width: 100%;
+    background: linear-gradient(180deg, var(--rain) 0%, var(--rain-dark) 100%);
+    border-radius: 2px 2px 0 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    min-height: 2px;
+    animation: growUp 1s ease forwards;
+  }
+
+  @keyframes growUp {
+    from { transform: scaleY(0); transform-origin: bottom; }
+    to { transform: scaleY(1); }
+  }
+
+  .bar-month-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; color: var(--muted);
+    margin-top: 8px; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .bar-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; color: var(--rain);
+    position: absolute;
+    top: -18px; left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  /* ─── SEASONS SECTION ─────────────────────────── */
+  .seasons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .season-card {
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s;
+  }
+  .season-card:hover { transform: translateY(-4px); }
+
+  .season-card.summer  { background: linear-gradient(135deg, rgba(232,69,69,0.12), rgba(245,166,35,0.08)); }
+  .season-card.monsoon { background: linear-gradient(135deg, rgba(0,180,166,0.12), rgba(77,166,255,0.08)); }
+  .season-card.post    { background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(255,255,255,0.03)); }
+  .season-card.winter  { background: linear-gradient(135deg, rgba(77,166,255,0.1), rgba(100,150,255,0.05)); }
+
+  .season-icon {
+    font-size: 44px; margin-bottom: 20px; display: block;
+  }
+
+  .season-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: #fff; margin-bottom: 6px;
+  }
+
+  .season-months {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .summer  .season-months { color: var(--fire); }
+  .monsoon .season-months { color: var(--teal); }
+  .post    .season-months { color: var(--amber); }
+  .winter  .season-months { color: var(--rain); }
+
+  .season-stats {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-top: 20px;
+  }
+
+  .sstat {
+    display: flex; justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .sstat-label { color: var(--muted); font-size: 11px; }
+  .sstat-val { font-family: 'DM Mono', monospace; font-weight: 500; color: #fff; }
+
+  .season-desc {
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ─── GACHIBOWLI SECTION ─────────────────────── */
+  .gachi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .gachi-main {
+    padding: 44px;
+    background: linear-gradient(135deg, rgba(232,69,69,0.1), rgba(11,24,41,0.9));
+    border: 1px solid rgba(232,69,69,0.2);
+    position: relative; overflow: hidden;
+  }
+
+  .gachi-main::before {
+    content: '🔥';
+    position: absolute; right: -20px; top: -20px;
+    font-size: 160px; opacity: 0.06;
+    transform: rotate(-15deg);
+  }
+
+  .heat-meter {
+    display: flex; align-items: center; gap: 16px;
+    margin: 24px 0;
+  }
+
+  .heat-bar-container {
+    flex: 1; height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px; overflow: hidden;
+  }
+
+  .heat-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--amber), var(--fire));
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+
+  .uhi-bullets {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 12px;
+    margin-top: 20px;
+  }
+
+  .uhi-bullets li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 13px; color: var(--text); line-height: 1.5;
+  }
+
+  .uhi-bullets li::before {
+    content: '▸';
+    color: var(--fire); flex-shrink: 0; margin-top: 1px;
+  }
+
+  .gachi-data-panel {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+
+  .gachi-data-item {
+    padding: 24px 28px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.2s;
+  }
+  .gachi-data-item:hover { background: var(--panel2); }
+
+  .gdi-label {
+    font-size: 12px; color: var(--muted);
+    font-weight: 300;
+  }
+  .gdi-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px; color: #fff; font-weight: 500;
+  }
+  .gdi-val.hot { color: var(--fire); }
+  .gdi-val.rain { color: var(--rain); }
+  .gdi-val.warn { color: var(--amber); }
+
+  /* ─── TREND SECTION ──────────────────────────── */
+  .trend-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .trend-card {
+    padding: 32px 28px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+  }
+  .trend-card:hover { background: var(--panel2); border-color: rgba(0,212,255,0.2); }
+
+  .trend-yr {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--muted); text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .trend-event {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700;
+    color: #fff; margin-bottom: 8px;
+  }
+
+  .trend-detail {
+    font-size: 12px; color: var(--muted);
+    line-height: 1.6; font-weight: 300;
+  }
+
+  .trend-badge {
+    display: inline-block; margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+  }
+
+  /* ─── 2026 PREDICTION ────────────────────────── */
+  .predict-hero {
+    padding: 60px;
+    background: linear-gradient(135deg, rgba(0,180,166,0.1), rgba(11,24,41,0.95));
+    border: 1px solid rgba(0,180,166,0.2);
+    margin-top: 0;
+    position: relative; overflow: hidden;
+  }
+
+  .predict-hero::after {
+    content: '2026';
+    position: absolute; right: -40px; top: -30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 220px; font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .predict-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .predict-item {
+    padding: 32px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .predict-item:hover { background: rgba(255,255,255,0.06); }
+
+  .predict-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .predict-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: #fff; margin-bottom: 8px;
+  }
+  .predict-text {
+    font-size: 12px; color: var(--muted); line-height: 1.7; font-weight: 300;
+  }
+
+  /* ─── SOURCE BADGE ───────────────────────────── */
+  .sources-row {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 32px;
+  }
+
+  .source-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* ─── TEMPERATURE TIMELINE ───────────────────── */
+  .temp-timeline {
+    position: relative;
+    margin-top: 48px;
+    padding: 40px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .temp-svg-container {
+    width: 100%; overflow-x: auto;
+  }
+
+  /* ─── ALERTS SECTION ─────────────────────────── */
+  .alert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .alert-card {
+    padding: 28px;
+    border-left: 3px solid;
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .alert-card.red    { border-left-color: var(--fire); }
+  .alert-card.orange { border-left-color: var(--amber); }
+  .alert-card.yellow { border-left-color: #f5e023; }
+
+  .alert-level {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .red    .alert-level { color: var(--fire); }
+  .orange .alert-level { color: var(--amber); }
+  .yellow .alert-level { color: #f5e023; }
+
+  .alert-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; color: #fff; margin-bottom: 8px;
+  }
+  .alert-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* ─── FOOTER ─────────────────────────────────── */
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+    position: relative; z-index: 1;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: #fff;
+  }
+  .footer-logo span { color: var(--amber); }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* ─── ANIMATIONS ─────────────────────────────── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero h1, .hero-eyebrow, .hero-sub, .hero-stats {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  .hero h1 { animation-delay: 0.1s; opacity: 0; }
+  .hero-sub { animation-delay: 0.3s; opacity: 0; }
+  .hero-stats { animation-delay: 0.5s; opacity: 0; }
+
+  .months-grid .month-card:nth-child(n) {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+  }
+  .month-card:nth-child(1)  { animation-delay: 0.05s; }
+  .month-card:nth-child(2)  { animation-delay: 0.10s; }
+  .month-card:nth-child(3)  { animation-delay: 0.15s; }
+  .month-card:nth-child(4)  { animation-delay: 0.20s; }
+  .month-card:nth-child(5)  { animation-delay: 0.25s; }
+  .month-card:nth-child(6)  { animation-delay: 0.30s; }
+  .month-card:nth-child(7)  { animation-delay: 0.35s; }
+  .month-card:nth-child(8)  { animation-delay: 0.40s; }
+  .month-card:nth-child(9)  { animation-delay: 0.45s; }
+  .month-card:nth-child(10) { animation-delay: 0.50s; }
+  .month-card:nth-child(11) { animation-delay: 0.55s; }
+  .month-card:nth-child(12) { animation-delay: 0.60s; }
+
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* ─── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 1100px) {
+    .months-grid { grid-template-columns: repeat(4, 1fr); }
+    .seasons-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 800px) {
+    .hero { padding: 60px 24px 40px; }
+    .container { padding: 0 24px; }
+    .months-grid { grid-template-columns: repeat(3, 1fr); }
+    .seasons-grid { grid-template-columns: 1fr; }
+    .gachi-grid  { grid-template-columns: 1fr; }
+    .trend-grid  { grid-template-columns: 1fr; }
+    .predict-grid { grid-template-columns: 1fr; }
+    .alert-grid  { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; }
+  }
+
+  /* IMD Alert pulse */
+  .pulse-dot {
+    display: inline-block; width: 8px; height: 8px;
+    background: var(--fire); border-radius: 50%;
+    animation: pulse 1.5s infinite;
+    margin-right: 6px;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+
+  .info-box {
+    padding: 36px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+  }
+
+  .info-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; margin-bottom: 16px; color: #fff;
+  }
+
+  .info-box p {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.8; font-weight: 300;
+  }
+
+  .highlight { color: var(--amber); font-weight: 600; }
+  .highlight-rain { color: var(--rain); font-weight: 600; }
+  .highlight-teal { color: var(--teal); font-weight: 600; }
+
+  /* ─── TEMPERATURE VIS ────────────────────────── */
+  #tempSvg { width: 100%; display: block; }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─────────────────────────────────── -->
+<div class="hero" style="position:relative;z-index:1;">
+  <div class="container">
+    <div class="hero-eyebrow">Hyderabad · Telangana · India · 2026</div>
+    <h1>Weather &amp; Climate<br><span>Deep Intelligence</span></h1>
+    <p class="hero-sub">A comprehensive month-by-month climate analysis for Hyderabad and the <strong>Gachibowli / HITEC City corridor</strong> — covering seasonal trends, monsoon behaviour, urban heat islands, and 2026 predictions from IMD, Skymet, ECMWF &amp; GHMC research.</p>
+
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-val">39<span class="unit">°C</span></div>
+        <div class="hstat-label">Peak Summer (May)</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-val">14<span class="unit">°C</span></div>
+        <div class="hstat-label">Winter Low (Dec)</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-val">829<span class="unit">mm</span></div>
+        <div class="hstat-label">Annual Rainfall</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-val">45<span class="unit">°C</span></div>
+        <div class="hstat-label">Gachibowli Road Temp</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-val">179<span class="unit">mm</span></div>
+        <div class="hstat-label">Peak Month Rain (Aug)</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-val">64<span class="unit">days</span></div>
+        <div class="hstat-label">Annual Rainy Days</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MONTH-BY-MONTH ───────────────────────── -->
+<div class="section">
+  <div class="container">
+    <div class="section-tag">Monthly Breakdown</div>
+    <h2>12-Month Temperature &amp; Rainfall Calendar</h2>
+    <p class="section-desc">Historical averages (1991–2024) from IMD Hyderabad, Weather Atlas &amp; Climate-Data.org. High/Low temperatures and monthly rainfall totals.</p>
+
+    <div class="months-grid">
+
+      <!-- JAN -->
+      <div class="month-card" style="--bar-color:var(--rain);--bar-scale:0.1;">
+        <div class="month-name">January</div>
+        <div class="month-temp-high">29°C</div>
+        <div class="month-temp-low">↓ 15°C Low</div>
+        <div class="month-rain">☔ ~10 mm &nbsp;|&nbsp; 1–2 days</div>
+        <div><span class="month-season-badge badge-winter">Winter</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">Dry &amp; pleasant. Clear skies, fog in early mornings. Best month for outdoor activities.</div>
+      </div>
+
+      <!-- FEB -->
+      <div class="month-card" style="--bar-color:var(--rain);--bar-scale:0.05;">
+        <div class="month-name">February</div>
+        <div class="month-temp-high">32°C</div>
+        <div class="month-temp-low">↓ 17°C Low</div>
+        <div class="month-rain">☔ ~3 mm &nbsp;|&nbsp; 1 day</div>
+        <div><span class="month-season-badge badge-winter">Winter-end</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">Driest month of year. Most sunshine (9.6 hrs/day). Temperatures starting to rise.</div>
+      </div>
+
+      <!-- MAR -->
+      <div class="month-card" style="--bar-color:var(--amber);--bar-scale:0.18;">
+        <div class="month-name">March</div>
+        <div class="month-temp-high">35°C</div>
+        <div class="month-temp-low">↓ 20°C Low</div>
+        <div class="month-rain">☔ ~13 mm &nbsp;|&nbsp; 2–3 days</div>
+        <div><span class="month-season-badge badge-summer">Pre-Summer</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">Heat begins. Humidity 39% — most comfortable spring month. Some pre-monsoon showers.</div>
+      </div>
+
+      <!-- APR -->
+      <div class="month-card" style="--bar-color:var(--amber);--bar-scale:0.24;">
+        <div class="month-name">April</div>
+        <div class="month-temp-high">37°C</div>
+        <div class="month-temp-low">↓ 23°C Low</div>
+        <div class="month-rain">☔ ~18 mm &nbsp;|&nbsp; 3–4 days</div>
+        <div><span class="month-season-badge badge-summer">Summer</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">Hot season begins. Lowest humidity (37%). Occasional thunderstorms. Heatwave alerts possible.</div>
+      </div>
+
+      <!-- MAY -->
+      <div class="month-card" style="--bar-color:var(--fire);--bar-scale:0.35;">
+        <div class="month-name">May</div>
+        <div class="month-temp-high" style="color:var(--fire);">39°C</div>
+        <div class="month-temp-low">↓ 26°C Low</div>
+        <div class="month-rain">☔ ~36 mm &nbsp;|&nbsp; 4–5 days</div>
+        <div><span class="month-season-badge badge-summer">Peak Summer</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">🔥 Hottest month. Temps can touch 44–45°C. Gachibowli road temps reach 45°C+. Pre-monsoon showers.</div>
+      </div>
+
+      <!-- JUN -->
+      <div class="month-card" style="--bar-color:var(--teal);--bar-scale:0.60;">
+        <div class="month-name">June</div>
+        <div class="month-temp-high">34°C</div>
+        <div class="month-temp-low">↓ 24°C Low</div>
+        <div class="month-rain">☔ ~104 mm &nbsp;|&nbsp; 9–10 days</div>
+        <div><span class="month-season-badge badge-monsoon">Monsoon Onset</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">SW Monsoon arrives (typically June 8–12). Rainfall surges 3× from May. Relief from heat.</div>
+      </div>
+
+      <!-- JUL -->
+      <div class="month-card" style="--bar-color:var(--rain);--bar-scale:0.95;">
+        <div class="month-name">July</div>
+        <div class="month-temp-high">31°C</div>
+        <div class="month-temp-low">↓ 22°C Low</div>
+        <div class="month-rain">☔ ~170 mm &nbsp;|&nbsp; 17 days</div>
+        <div><span class="month-season-badge badge-monsoon">Peak Monsoon</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">🌧️ Wettest month (most rain days: 16–17). Flooding in low-lying areas. Humidity 74%+.</div>
+      </div>
+
+      <!-- AUG -->
+      <div class="month-card" style="--bar-color:var(--rain);--bar-scale:1.0;">
+        <div class="month-name">August</div>
+        <div class="month-temp-high">30°C</div>
+        <div class="month-temp-low">↓ 22°C Low</div>
+        <div class="month-rain">☔ ~179 mm &nbsp;|&nbsp; 14 days</div>
+        <div><span class="month-season-badge badge-monsoon">Peak Monsoon</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">🌧️ Highest rainfall month. Humidity peaks (74%). Overcast skies. Minimal sunshine (4.6 hrs).</div>
+      </div>
+
+      <!-- SEP -->
+      <div class="month-card" style="--bar-color:var(--teal);--bar-scale:0.88;">
+        <div class="month-name">September</div>
+        <div class="month-temp-high">30°C</div>
+        <div class="month-temp-low">↓ 22°C Low</div>
+        <div class="month-rain">☔ ~158 mm &nbsp;|&nbsp; 12 days</div>
+        <div><span class="month-season-badge badge-monsoon">Retreating</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">Highest relative humidity (78%). Rain gradually retreating. Cyclone risk elevated from Bay of Bengal.</div>
+      </div>
+
+      <!-- OCT -->
+      <div class="month-card" style="--bar-color:var(--amber);--bar-scale:0.42;">
+        <div class="month-name">October</div>
+        <div class="month-temp-high">32°C</div>
+        <div class="month-temp-low">↓ 20°C Low</div>
+        <div class="month-rain">☔ ~70 mm &nbsp;|&nbsp; 6–7 days</div>
+        <div><span class="month-season-badge badge-post">Post-Monsoon</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">Temperatures rising again. NE monsoon brings sporadic rains. Peak cyclone season (NE Arabian).</div>
+      </div>
+
+      <!-- NOV -->
+      <div class="month-card" style="--bar-color:var(--amber);--bar-scale:0.16;">
+        <div class="month-name">November</div>
+        <div class="month-temp-high">29°C</div>
+        <div class="month-temp-low">↓ 17°C Low</div>
+        <div class="month-rain">☔ ~22 mm &nbsp;|&nbsp; 3 days</div>
+        <div><span class="month-season-badge badge-post">Post-Monsoon</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">Pleasant transition. Warm days, chilly nights. End of rainy season. Best period to arrive.</div>
+      </div>
+
+      <!-- DEC -->
+      <div class="month-card" style="--bar-color:var(--rain);--bar-scale:0.08;">
+        <div class="month-name">December</div>
+        <div class="month-temp-high">28°C</div>
+        <div class="month-temp-low">↓ 14°C Low</div>
+        <div class="month-rain">☔ ~6 mm &nbsp;|&nbsp; 1 day</div>
+        <div><span class="month-season-badge badge-winter">Winter</span></div>
+        <div style="margin-top:8px;font-size:11px;color:var(--muted);">❄️ Coldest month (14°C nights). Dry, clear skies. Second-best month for visitors.</div>
+      </div>
+
+    </div><!-- /months-grid -->
+
+  </div>
+</div>
+
+<!-- ─── RAINFALL CHART ────────────────────────── -->
+<div class="section">
+  <div class="container">
+    <div class="section-tag">Precipitation Analysis</div>
+    <h2>Monthly Rainfall Distribution</h2>
+    <p class="section-desc">Annual total ~829mm concentrated in 4 monsoon months (June–September). The remaining 8 months receive only ~168mm combined.</p>
+
+    <div class="chart-container">
+      <div class="chart-title">
+        <span>Avg Monthly Rainfall (mm) · Sources: IMD, Weather Atlas, Climate-Data.org (1991–2024)</span>
+        <div class="chart-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--rain)"></div>Rainfall (mm)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--fire)"></div>Extreme month</div>
+        </div>
+      </div>
+
+      <div class="bar-chart" id="rainChart">
+        <!-- bars rendered by JS -->
+      </div>
+
+      <div style="display:flex; gap:8px; margin-top:8px;">
+        <div id="rainLabels" style="display:flex; gap:8px; width:100%;"></div>
+      </div>
+    </div>
+
+    <!-- Temperature SVG Chart -->
+    <div class="chart-container" style="margin-top:2px;">
+      <div class="chart-title">
+        Monthly Temperature Range · High (°C) vs Low (°C)</div>
+      <div class="temp-svg-container">
+        <svg id="tempSvg" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid lines -->
+          <line x1="40" y1="20" x2="40" y2="260" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <line x1="40" y1="260" x2="1180" y2="260" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+          <!-- Y-axis labels -->
+          <text x="32" y="24" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="end">45°</text>
+          <text x="32" y="78" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="end">35°</text>
+          <text x="32" y="132" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="end">25°</text>
+          <text x="32" y="186" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="end">15°</text>
+          <text x="32" y="240" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="end">5°</text>
+
+          <!-- Grid lines horizontal -->
+          <line x1="40" y1="24" x2="1180" y2="24" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4,4"/>
+          <line x1="40" y1="78" x2="1180" y2="78" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4,4"/>
+          <line x1="40" y1="132" x2="1180" y2="132" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4,4"/>
+          <line x1="40" y1="186" x2="1180" y2="186" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4,4"/>
+          <line x1="40" y1="240" x2="1180" y2="240" stroke="rgba(255,255,255,0.04)" stroke-dasharray="4,4"/>
+
+          <!-- HIGH TEMP Line: Jan29 Feb32 Mar35 Apr37 May39 Jun34 Jul31 Aug30 Sep30 Oct32 Nov29 Dec28 -->
+          <!-- Scale: y = 260 - (temp - 5) * (240/40) = 260 - temp*6 + 30 = 290 - temp*5.5 -->
+          <!-- Using scale: 260px maps 5° to 45°, so each degree = (260-20)/(45-5) = 6px -->
+          <!-- y = 260 - (temp-5)*6 -->
+          <polyline
+            points="90,110  180,74  270,50  360,32  450,14  540,56  630,86  720,92  810,92  900,74  990,110  1080,122"
+            fill="none" stroke="url(#highGrad)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+          <!-- LOW TEMP Line: Jan16 Feb17 Mar20 Apr23 May26 Jun24 Jul22 Aug22 Sep22 Oct20 Nov17 Dec14 -->
+          <polyline
+            points="90,194  180,188  270,170  360,152  450,134  540,146  630,158  720,158  810,158  900,170  990,188  1080,206"
+            fill="none" stroke="url(#lowGrad)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6,3"/>
+
+          <!-- Gradient fill between lines -->
+          <defs>
+            <linearGradient id="highGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#4da6ff"/>
+              <stop offset="35%" stop-color="#f5a623"/>
+              <stop offset="50%" stop-color="#e84545"/>
+              <stop offset="65%" stop-color="#4da6ff"/>
+              <stop offset="100%" stop-color="#4da6ff"/>
+            </linearGradient>
+            <linearGradient id="lowGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#00d4ff"/>
+              <stop offset="50%" stop-color="#00b4a6"/>
+              <stop offset="100%" stop-color="#00d4ff"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Dots on high line -->
+          <circle cx="90"  cy="110" r="4" fill="#f5a623"/>
+          <circle cx="180" cy="74"  r="4" fill="#f5a623"/>
+          <circle cx="270" cy="50"  r="4" fill="#f5a623"/>
+          <circle cx="360" cy="32"  r="4" fill="#f5a623"/>
+          <circle cx="450" cy="14"  r="5" fill="#e84545" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="540" cy="56"  r="4" fill="#00b4a6"/>
+          <circle cx="630" cy="86"  r="4" fill="#4da6ff"/>
+          <circle cx="720" cy="92"  r="4" fill="#4da6ff"/>
+          <circle cx="810" cy="92"  r="4" fill="#4da6ff"/>
+          <circle cx="900" cy="74"  r="4" fill="#f5a623"/>
+          <circle cx="990" cy="110" r="4" fill="#f5a623"/>
+          <circle cx="1080" cy="122" r="4" fill="#4da6ff"/>
+
+          <!-- Month labels -->
+          <text x="90"   y="285" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="middle">JAN</text>
+          <text x="180"  y="285" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="middle">FEB</text>
+          <text x="270"  y="285" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="middle">MAR</text>
+          <text x="360"  y="285" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="middle">APR</text>
+          <text x="450"  y="285" fill="#e84545" font-size="10" font-family="DM Mono" text-anchor="middle" font-weight="bold">MAY</text>
+          <text x="540"  y="285" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="middle">JUN</text>
+          <text x="630"  y="285" fill="#4da6ff" font-size="10" font-family="DM Mono" text-anchor="middle">JUL</text>
+          <text x="720"  y="285" fill="#4da6ff" font-size="10" font-family="DM Mono" text-anchor="middle">AUG</text>
+          <text x="810"  y="285" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="middle">SEP</text>
+          <text x="900"  y="285" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="middle">OCT</text>
+          <text x="990"  y="285" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="middle">NOV</text>
+          <text x="1080" y="285" fill="#8ca0bc" font-size="10" font-family="DM Mono" text-anchor="middle">DEC</text>
+
+          <!-- Labels on curve -->
+          <text x="450" y="8"  fill="#e84545" font-size="10" font-family="DM Mono" text-anchor="middle">39°</text>
+          <text x="630" y="102" fill="#4da6ff" font-size="10" font-family="DM Mono" text-anchor="middle">31°</text>
+
+          <!-- Legend -->
+          <line x1="50" y1="12" x2="70" y2="12" stroke="#f5a623" stroke-width="2.5"/>
+          <text x="75" y="16" fill="#8ca0bc" font-size="10" font-family="DM Mono">High Temp</text>
+          <line x1="160" y1="12" x2="180" y2="12" stroke="#00d4ff" stroke-width="2" stroke-dasharray="5,2"/>
+          <text x="185" y="16" fill="#8ca0bc" font-size="10" font-family="DM Mono">Low Temp</text>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── SEASONS ───────────────────────────────── -->
+<div class="section">
+  <div class="container">
+    <div class="section-tag">Seasonal Analysis</div>
+    <h2>Four Seasons of Hyderabad</h2>
+    <p class="section-desc">Hyderabad follows a distinct 4-season pattern shaped by the southwest monsoon, continental air masses, and its Deccan Plateau elevation (~536m).</p>
+
+    <div class="seasons-grid">
+
+      <!-- SUMMER -->
+      <div class="season-card summer">
+        <span class="season-icon">☀️</span>
+        <div class="season-name">Summer &amp; Pre-Monsoon</div>
+        <div class="season-months">March – May (+ June onset)</div>
+        <div class="season-stats">
+          <div class="sstat">
+            <span class="sstat-label">Peak Temperature</span>
+            <span class="sstat-val" style="color:var(--fire);">39–44°C</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Night Low</span>
+            <span class="sstat-val">20–26°C</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Humidity</span>
+            <span class="sstat-val">37–55%</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Rainfall</span>
+            <span class="sstat-val">13–36mm/month</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">UV Index</span>
+            <span class="sstat-val" style="color:var(--fire);">12 (Extreme)</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Hot Season Duration</span>
+            <span class="sstat-val">~2.1 months (Apr–Jun 3)</span>
+          </div>
+        </div>
+        <p class="season-desc">The most punishing season. May is the definitive peak — temperatures regularly cross 40°C and can reach 44–45°C during heatwave episodes. April sees the lowest humidity of the year (37%), making intense heat slightly more bearable. Pre-monsoon thunderstorms bring brief relief in May. Heatwave alerts from IMD are common April–May for Telangana. The hot season officially runs <strong>March 31 – June 3</strong> (daily high above 37°C).</p>
+      </div>
+
+      <!-- MONSOON -->
+      <div class="season-card monsoon">
+        <span class="season-icon">🌧️</span>
+        <div class="season-name">Southwest Monsoon</div>
+        <div class="season-months">June 8–12 to September</div>
+        <div class="season-stats">
+          <div class="sstat">
+            <span class="sstat-label">Average High</span>
+            <span class="sstat-val" style="color:var(--teal);">29–34°C</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Night Low</span>
+            <span class="sstat-val">22–24°C</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Humidity Peak</span>
+            <span class="sstat-val" style="color:var(--rain);">74–78%</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Total Rainfall</span>
+            <span class="sstat-val" style="color:var(--rain);">~611mm</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Peak Month</span>
+            <span class="sstat-val">Aug: 179mm</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Sunshine</span>
+            <span class="sstat-val">4.6–6 hrs/day</span>
+          </div>
+        </div>
+        <p class="season-desc">The SW Monsoon enters Hyderabad typically on June 8–12 (has been delayed up to 12 days). Rainfall surges from 36mm in May to 104mm in June, 170mm in July, 179mm in August. Over <strong>73% of annual rainfall</strong> arrives in these 4 months. Low-lying areas flood (Pillar 191, Zoo Park underpasses). IMD issues Orange and Yellow alerts regularly. Bay of Bengal low-pressure systems amplify rainfall, occasionally triggering 100mm+ events in 24 hours.</p>
+      </div>
+
+      <!-- POST-MONSOON -->
+      <div class="season-card post">
+        <span class="season-icon">🍂</span>
+        <div class="season-name">Post-Monsoon / Autumn</div>
+        <div class="season-months">October – November</div>
+        <div class="season-stats">
+          <div class="sstat">
+            <span class="sstat-label">Temperature Range</span>
+            <span class="sstat-val">20–32°C</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Rainfall</span>
+            <span class="sstat-val">22–70mm/month</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Humidity</span>
+            <span class="sstat-val">55–65%</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Cyclone Risk</span>
+            <span class="sstat-val" style="color:var(--amber);">Moderate–High</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Best for</span>
+            <span class="sstat-val">Arrival month</span>
+          </div>
+        </div>
+        <p class="season-desc">A pleasant transition period. October sees temperatures rising again post-monsoon (29–32°C) with sporadic NE monsoon rains. This is peak cyclone season — Bay of Bengal cyclones can bring isolated heavy rainfall to Hyderabad. The devastating October 2020 floods (32cm in 24hrs, ₹1,230 crore losses) occurred in this period. November is generally dry and comfortable — ideal for travel.</p>
+      </div>
+
+      <!-- WINTER -->
+      <div class="season-card winter">
+        <span class="season-icon">❄️</span>
+        <div class="season-name">Winter / Cool Season</div>
+        <div class="season-months">December – February (– mid-March)</div>
+        <div class="season-stats">
+          <div class="sstat">
+            <span class="sstat-label">Day High</span>
+            <span class="sstat-val" style="color:var(--rain);">28–32°C</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Night Low</span>
+            <span class="sstat-val" style="color:var(--cyan);">14–17°C</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Coldest Low Recorded</span>
+            <span class="sstat-val">~8–9°C (rare)</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Rainfall</span>
+            <span class="sstat-val">3–10mm/month</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Sunshine</span>
+            <span class="sstat-val">9.6 hrs/day (Feb)</span>
+          </div>
+          <div class="sstat">
+            <span class="sstat-label">Cool Season Duration</span>
+            <span class="sstat-val">~3.4 months</span>
+          </div>
+        </div>
+        <p class="season-desc">Hyderabad's most comfortable season. December is coldest with nights dropping to 14–15°C (occasionally lower during Western Disturbance events). Days remain warm and pleasant (28°C). Virtually no rain. February has maximum sunshine hours (9.6 hrs/day). Cool season officially runs <strong>October 19 – January 30</strong> (daily high below 29°C). Mild fog occurs in December–January mornings.</p>
+      </div>
+
+    </div><!-- /seasons-grid -->
+  </div>
+</div>
+
+<!-- ─── GACHIBOWLI UHI ─────────────────────────── -->
+<div class="section">
+  <div class="container">
+    <div class="section-tag">Urban Heat Island Focus</div>
+    <h2>Gachibowli &amp; HITEC City — The Heat Hotspot</h2>
+    <p class="section-desc">Research from GHMC, IIIT-Hyderabad, and Climate Front Telangana identifies Gachibowli ward as one of Hyderabad's most intense Urban Heat Island zones — 2–5°C hotter than official readings.</p>
+
+    <div class="gachi-grid">
+      <!-- Main panel -->
+      <div class="gachi-main">
+        <div class="section-tag" style="margin-bottom:12px; color:var(--fire);">⚠ UHI Alert Zone</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:26px; margin-bottom:12px; color:#fff;">Gachibowli Ward<br><span style="color:var(--fire);">Western Hyderabad</span></h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.7;">GHMC's March 2024 Urban Heat Island analysis (Hyderabad Urban Lab) identified Gachibowli ward as one of the highest Land Surface Temperature (LST) zones in the city.</p>
+
+        <div class="heat-meter">
+          <span style="font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); width:120px;">City Average</span>
+          <div class="heat-bar-container"><div class="heat-bar-fill" style="width:60%;"></div></div>
+          <span style="font-family:'DM Mono',monospace; font-size:11px; color:var(--amber);">39°C</span>
+        </div>
+        <div class="heat-meter">
+          <span style="font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); width:120px;">Gachibowli Feel</span>
+          <div class="heat-bar-container"><div class="heat-bar-fill" style="width:80%; background:linear-gradient(90deg,var(--fire),#ff7700);"></div></div>
+          <span style="font-family:'DM Mono',monospace; font-size:11px; color:var(--fire);">42–44°C</span>
+        </div>
+        <div class="heat-meter">
+          <span style="font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); width:120px;">Road Surface Temp</span>
+          <div class="heat-bar-container"><div class="heat-bar-fill" style="width:100%; background:linear-gradient(90deg,#e84545,#ff0000);"></div></div>
+          <span style="font-family:'DM Mono',monospace; font-size:11px; color:var(--fire); font-weight:bold;">45°C+</span>
+        </div>
+
+        <ul class="uhi-bullets">
+          <li>Glass-facade high-rises in HITEC City act as solar mirrors, reflecting radiation onto roads and pedestrians — intensifying heat by 3–5°C between 12–4 PM.</li>
+          <li>Roads in and around Gachibowli provide minimal shade; surface temperatures recorded at <strong>45°C+</strong> in summer (Oorvani Foundation data, Feb 2026).</li>
+          <li>Rapid concretisation and declining tree cover trap heat — concrete absorbs heat all day and releases it at night, preventing cooling after sunset.</li>
+          <li>50% of gig workers in Gachibowli corridor report decreased productivity due to heat (HeatWatch × TGPWU survey, 2024).</li>
+          <li>Hitech City ward recorded <strong>50°C surface temperature</strong> in past measurements — among highest in the city.</li>
+          <li>Summer heat waves now begin as early as February–March (was April in previous decades), driven by urban expansion.</li>
+        </ul>
+      </div>
+
+      <!-- Data panel -->
+      <div class="gachi-data-panel">
+        <div class="gachi-data-item">
+          <div>
+            <div class="gdi-label">UHI Classification (GHMC 2024)</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Western Hyderabad — highest LST cluster</div>
+          </div>
+          <div class="gdi-val hot">HOTSPOT</div>
+        </div>
+        <div class="gachi-data-item">
+          <div>
+            <div class="gdi-label">Peak Summer Air Temp (Gachibowli feel)</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Official reading vs ground-level experience</div>
+          </div>
+          <div class="gdi-val hot">42–44°C</div>
+        </div>
+        <div class="gachi-data-item">
+          <div>
+            <div class="gdi-label">Road Surface Temperature</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Unshaded asphalt, peak afternoon hours</div>
+          </div>
+          <div class="gdi-val hot">45°C+</div>
+        </div>
+        <div class="gachi-data-item">
+          <div>
+            <div class="gdi-label">Monsoon Rainfall (June–Sep)</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Rangareddy/Gachibowli area, average</div>
+          </div>
+          <div class="gdi-val rain">~600mm</div>
+        </div>
+        <div class="gachi-data-item">
+          <div>
+            <div class="gdi-label">Flash Flood Risk (July–Aug)</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Low-lying underpasses &amp; Aramghar area</div>
+          </div>
+          <div class="gdi-val warn">HIGH</div>
+        </div>
+        <div class="gachi-data-item">
+          <div>
+            <div class="gdi-label">Winter Night Low (Dec–Jan)</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Gachibowli area, clear sky nights</div>
+          </div>
+          <div class="gdi-val rain">14–17°C</div>
+        </div>
+        <div class="gachi-data-item">
+          <div>
+            <div class="gdi-label">Wind Speed (Gachibowli corridor)</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Annual average; buildings reduce airflow</div>
+          </div>
+          <div class="gdi-val">~11 km/h</div>
+        </div>
+        <div class="gachi-data-item">
+          <div>
+            <div class="gdi-label">Heatwave Season Start (trend)</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Shifting earlier each decade due to UHI</div>
+          </div>
+          <div class="gdi-val warn">Feb–Mar</div>
+        </div>
+        <div class="gachi-data-item">
+          <div>
+            <div class="gdi-label">Source</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Oorvani / IIIT-H / GHMC / Siasat 2026</div>
+          </div>
+          <div class="gdi-val" style="color:var(--teal); font-size:12px;">Verified</div>
+        </div>
+      </div>
+
+    </div><!-- /gachi-grid -->
+
+    <!-- Two additional info boxes -->
+    <div class="two-col" style="margin-top:2px;">
+      <div class="info-box">
+        <h3>Why HITEC City / Gachibowli Feels Hotter</h3>
+        <p>Modern IT towers feature <span class="highlight">reflective glass exteriors</span> that don't absorb sunlight — instead bouncing solar radiation onto surrounding roads and pedestrians. Between 12 PM–4 PM, these buildings act like solar mirrors, intensifying local temperature by 3–5°C above official IMD readings. Unlike older Hyderabad localities with tree canopy and older construction, the <span class="highlight">Gachibowli-Madhapur-HITEC corridor</span> is characterised by glass-steel structures, wide unshaded roads, and minimal green cover. Large vehicle density (IT commuters) also generates additional heat through exhaust and braking.</p>
+      </div>
+      <div class="info-box">
+        <h3>Flooding Risk in Monsoon Season</h3>
+        <p>While Gachibowli itself sits on elevated terrain, <span class="highlight-rain">surrounding low-lying areas flood severely</span> during peak monsoon. GHMC flagged six high-impact zones: Khairatabad, LB Nagar, Charminar, Secunderabad, Kukatpally, and <span class="highlight-rain">Serilingampally</span> (which includes the Gachibowli area). In July 2025, parts of Hyderabad recorded <span class="highlight-rain">100+mm in 24 hours</span> triggering traffic jams and power outages. The Pillar 191 underpass near Aramghar is among the most dangerous flood-prone spots near the IT corridor. HYDRAA and GHMC deploy emergency teams in this zone annually from June.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── CLIMATE TRENDS ─────────────────────────── -->
+<div class="section">
+  <div class="container">
+    <div class="section-tag">Historical Trend &amp; Extreme Events</div>
+    <h2>Climate Trends &amp; Notable Events</h2>
+    <p class="section-desc">Hyderabad's climate has been measurably warming over recent decades. Urban expansion, declining water bodies, and reduced green cover are amplifying extreme heat events.</p>
+
+    <div class="trend-grid">
+      <div class="trend-card">
+        <div class="trend-yr">September 1908</div>
+        <div class="trend-event">The Great Musi Flood</div>
+        <div class="trend-detail">The most catastrophic flood in Hyderabad history. Over 15,000 lives lost. Led to construction of Osman Sagar and Himayat Sagar reservoirs for flood control. The defining moment for Hyderabad's water infrastructure.</div>
+        <span class="trend-badge" style="background:rgba(232,69,69,0.15); color:var(--fire);">Historical</span>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-yr">October 2020</div>
+        <div class="trend-event">Flash Flood Crisis</div>
+        <div class="trend-detail">Deep Depression BOB 02 brought ~32cm rainfall in 24 hours. Over 100 deaths. ₹1,230 crore in losses. Worst flooding since 1908. Triggered major GHMC drainage reform and creation of HYDRAA authority.</div>
+        <span class="trend-badge" style="background:rgba(232,69,69,0.15); color:var(--fire);">Catastrophic</span>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-yr">2024 Data</div>
+        <div class="trend-event">UHI Clusters Confirmed</div>
+        <div class="trend-detail">GHMC March 2024 analysis identified Gachibowli, Patancheruvu, Bandlaguda, Mailardevpally, BN Reddy Nagar as primary Urban Heat Island clusters. Hyderabad Urban Lab confirmed rapid LST increase since 2001.</div>
+        <span class="trend-badge" style="background:rgba(245,166,35,0.15); color:var(--amber);">Research</span>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-yr">July 2025</div>
+        <div class="trend-event">100mm Flash Rainfall</div>
+        <div class="trend-detail">Parts of Hyderabad recorded 100+mm in 24 hours (July 19, 2025) under active Bay of Bengal low-pressure influence. Orange alerts across 18 Telangana districts including Hyderabad. IMD issued early warnings via Damini app.</div>
+        <span class="trend-badge" style="background:rgba(0,180,166,0.15); color:var(--teal);">Extreme</span>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-yr">2025 Monsoon</div>
+        <div class="trend-event">Above-Normal Season</div>
+        <div class="trend-detail">IMD's LRF predicted 105% of LPA for India in 2025 — with Telangana and northern Andhra Pradesh among the highest probability zones for much-above-normal rainfall. La Niña-like conditions enhanced Bay of Bengal low-pressure formation.</div>
+        <span class="trend-badge" style="background:rgba(77,166,255,0.15); color:var(--rain);">2025</span>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-yr">Ongoing Trend</div>
+        <div class="trend-event">Earlier Summer Onset</div>
+        <div class="trend-detail">Heat wave conditions now routinely arrive in late February–March (was April in previous decades). Urban datajam (Oorvani Foundation, Feb 2026) documented "worsening summers with heat waves starting earlier each year." Concretisation identified as primary driver.</div>
+        <span class="trend-badge" style="background:rgba(232,69,69,0.15); color:var(--fire);">Trend</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ─── 2026 PREDICTIONS ───────────────────────── -->
+<div class="section">
+  <div class="container">
+    <div class="section-tag">2026 Forecast</div>
+    <h2>2026 Seasonal Predictions<br><span style="color:var(--muted); font-style:italic; font-size:0.65em;">IMD · Skymet · ECMWF · Pingtv</span></h2>
+    <p class="section-desc">Multi-source synthesis from IMD's Long Range Forecast (April 2026), Skymet monthly analysis, ECMWF sub-seasonal models, and ground-level Telangana data.</p>
+
+    <div class="predict-hero" style="margin-top:32px;">
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <div style="flex:1;">
+          <div class="section-tag" style="color:var(--amber);">🔴 Key 2026 Finding</div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:26px; color:#fff; margin-bottom:12px;">Below-Normal Monsoon 2026<br><span style="color:var(--amber);">92% of Long Period Average</span></h3>
+          <p style="font-size:13px; color:var(--muted); max-width:700px; line-height:1.8;">IMD's April 2026 Long Range Forecast is the <strong>first below-normal monsoon prediction since 2015</strong>. El Niño developing in the Pacific Ocean's second half is the primary driver. However, an early monsoon onset (Andaman by May 18–25, ahead of schedule) and Positive IOD may partially offset El Niño impacts in early June–July. Telangana is forecast to receive <strong>normal rainfall</strong> within this below-normal national picture.</p>
+        </div>
+        <div style="text-align:center; padding:24px;">
+          <div style="font-family:'Playfair Display',serif; font-size:80px; color:var(--amber); line-height:1; font-weight:900;">92%</div>
+          <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:2px; margin-top:4px;">OF LPA · IMD FORECAST</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="predict-grid">
+
+      <div class="predict-item">
+        <span class="predict-icon">🌡️</span>
+        <div class="predict-title">Summer 2026 (Mar–May)</div>
+        <p class="predict-text">Continuation of early heatwave pattern. <span class="highlight">Temperatures crossing 43–44°C in April–May</span> expected. IMD issued heat wave alerts for Telangana in mid-April 2026 (actual: 43.8°C at Akola on April 14). Gachibowli corridor to experience ground-feel temperatures 2–5°C above official readings. May 2026 max expected to reach 40–42°C. <br><br>Forecast (May 2026): Max 38–41°C, Min 24–26°C. Peak heat: 18–26 May with max touching 41°C per QWeather 30-day model.</p>
+      </div>
+
+      <div class="predict-item">
+        <span class="predict-icon">🌧️</span>
+        <div class="predict-title">Monsoon 2026 (Jun–Sep)</div>
+        <p class="predict-text">Early onset possible — ECMWF models suggest Andaman arrival May 18–25, Kerala onset by late May to early June (<span class="highlight-rain">3–7 days ahead of normal June 1</span>). Despite early arrival, total seasonal rainfall projected at 92% LPA nationally. Telangana and interior Peninsular India forecast: <span class="highlight-teal">largely normal rainfall</span>. July 2026 nationally at ~95% LPA. El Niño strengthening in Aug–Sep may reduce late monsoon rainfall. Expect active spells in June–July and possible early withdrawal in September.</p>
+      </div>
+
+      <div class="predict-item">
+        <span class="predict-icon">❄️</span>
+        <div class="predict-title">Winter 2026 Outlook</div>
+        <p class="predict-text">Hyderabad's winter (Oct–Feb) is expected to remain in its long-term range: Dec nights 14–17°C, Jan nights 15–18°C. The <span class="highlight-rain">IOD shifting positive</span> toward late monsoon season could influence October–November rainfall in post-monsoon. No major departures from normal expected for winter 2026. Western Disturbances will bring occasional drizzle Dec–Feb. UHI effect continues to slightly raise night-time minimums in Gachibowli by 0.5–1°C compared to surrounding rural areas.</p>
+      </div>
+
+      <div class="predict-item">
+        <span class="predict-icon">⚡</span>
+        <div class="predict-title">Pre-Monsoon Thunderstorms</div>
+        <p class="predict-text">April–May 2026: <span class="highlight">Scattered thunderstorms with lightning</span> expected across Telangana and Maharashtra (Skymet April 2026). IMD advises use of Damini lightning-alert app. Gusty winds 30–40 kmph possible during storm events. Pre-monsoon rainfall slightly higher than normal in this period due to seasonal north-south peninsular trough oscillations. Thunderstorm days in May: expect 4–6 events for Hyderabad city.</p>
+      </div>
+
+      <div class="predict-item">
+        <span class="predict-icon">🌊</span>
+        <div class="predict-title">Flood Risk Assessment 2026</div>
+        <p class="predict-text">Even with below-normal seasonal total, <span class="highlight-rain">intense short-burst events</span> remain likely (Bay of Bengal lows). GHMC high-risk zones (Serilingampally/Gachibowli periphery, LB Nagar, Aramghar) should prepare early. HYDRAA and SDRF on alert June 15 onwards per IMD planning protocol. Key risk window: late July–August during active low-pressure systems. October cyclone window: monitor Bay of Bengal for post-monsoon systems.</p>
+      </div>
+
+      <div class="predict-item">
+        <span class="predict-icon">☀️</span>
+        <div class="predict-title">El Niño &amp; IOD Impact</div>
+        <p class="predict-text">IMD's MMCFS model suggests <span class="highlight">El Niño developing in Pacific</span> — neutral ENSO currently but warming expected by mid-2026. Positive IOD developing toward late monsoon season could partially counteract El Niño's drying effect for South India / Telangana specifically. La Niña officially declared "Final Advisory" — transitioning to neutral/El Niño Watch. This combination explains below-normal national forecast but <span class="highlight-teal">near-normal outlook for Telangana</span>.</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── IMD ALERTS ─────────────────────────────── -->
+<div class="section">
+  <div class="container">
+    <div class="section-tag">IMD Alert System</div>
+    <h2>Understanding Hyderabad's Weather Alerts</h2>
+    <p class="section-desc">The India Meteorological Department issues colour-coded alerts for Hyderabad and Telangana. During monsoon season (June–September), these activate frequently.</p>
+
+    <div class="alert-grid">
+      <div class="alert-card red">
+        <div class="alert-level"><span class="pulse-dot"></span>Red Alert</div>
+        <div class="alert-title">Extreme Rainfall / Heatwave</div>
+        <div class="alert-text">Rainfall exceeding 204.5mm in 24 hours. Or temperature 6°C+ above normal with severe heatwave. Take shelter; avoid outdoor movement. GHMC &amp; SDRF on full deployment. Gachibowli underpasses closed during events. Very rare but triggered during Bay of Bengal deep depressions.</div>
+      </div>
+      <div class="alert-card orange">
+        <div class="alert-level">Orange Alert</div>
+        <div class="alert-title">Very Heavy Rain (115–204mm)</div>
+        <div class="alert-text">Common in July–August peak monsoon. Covers Hyderabad, Medchal-Malkajgiri, Rangareddy districts. Thunderstorms with lightning and 30–40 km/h gusts. Traffic disruptions in waterlogged low-lying zones. 3-hour advance warning via IMD Mausam app.</div>
+      </div>
+      <div class="alert-card yellow">
+        <div class="alert-level">Yellow Alert</div>
+        <div class="alert-title">Moderate to Heavy Rain (64–115mm)</div>
+        <div class="alert-text">Most frequently issued alert for Hyderabad. Applies to Nalgonda, Medchal-Malkajgiri, Rangareddy, Vikarabad, Sangareddy. Caution during commute; avoid low-lying zones. Standard advisory: avoid open areas during lightning. IMD Damini app gives lightning 1km radius alerts.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── QUICK REFERENCE TABLE ─────────────────── -->
+<div class="section">
+  <div class="container">
+    <div class="section-tag">Complete Data Reference</div>
+    <h2>Full Monthly Climate Data Table</h2>
+    <p class="section-desc">Comprehensive reference from multiple sources (IMD · Weather Atlas · Climate-Data.org · WeatherSpark · Climates To Travel)</p>
+
+    <div style="overflow-x:auto; margin-top:32px;">
+      <table style="width:100%; border-collapse:collapse; font-family:'DM Mono',monospace; font-size:12px;">
+        <thead>
+          <tr style="border-bottom: 2px solid rgba(245,166,35,0.3);">
+            <th style="text-align:left; padding:12px 16px; color:var(--amber); font-size:10px; letter-spacing:2px; text-transform:uppercase; white-space:nowrap;">Month</th>
+            <th style="text-align:center; padding:12px 16px; color:var(--amber); font-size:10px; letter-spacing:2px; text-transform:uppercase;">Max °C</th>
+            <th style="text-align:center; padding:12px 16px; color:var(--amber); font-size:10px; letter-spacing:2px; text-transform:uppercase;">Min °C</th>
+            <th style="text-align:center; padding:12px 16px; color:var(--rain); font-size:10px; letter-spacing:2px; text-transform:uppercase;">Rain mm</th>
+            <th style="text-align:center; padding:12px 16px; color:var(--muted); font-size:10px; letter-spacing:2px; text-transform:uppercase;">Rain Days</th>
+            <th style="text-align:center; padding:12px 16px; color:var(--muted); font-size:10px; letter-spacing:2px; text-transform:uppercase;">Humidity %</th>
+            <th style="text-align:center; padding:12px 16px; color:var(--muted); font-size:10px; letter-spacing:2px; text-transform:uppercase;">Sun Hrs</th>
+            <th style="text-align:left; padding:12px 16px; color:var(--muted); font-size:10px; letter-spacing:2px; text-transform:uppercase;">Season</th>
+          </tr>
+        </thead>
+        <tbody id="climateTable">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sources-row" style="margin-top:32px;">
+      <span class="source-chip">IMD Hyderabad</span>
+      <span class="source-chip">Weather Atlas 2024</span>
+      <span class="source-chip">WeatherSpark ERA5</span>
+      <span class="source-chip">Climate-Data.org 1991–2021</span>
+      <span class="source-chip">Climates To Travel</span>
+      <span class="source-chip">GHMC Research 2024</span>
+      <span class="source-chip">Skymet April 2026</span>
+      <span class="source-chip">ECMWF Subseasonal</span>
+      <span class="source-chip">Oorvani / IIIT-H</span>
+      <span class="source-chip">Telangana TGDPS</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── FOOTER ────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">Hyderabad Climate <span>Intelligence</span></div>
+  <div class="footer-note">
+    Data synthesised from IMD · Skymet · ECMWF · GHMC · Weather Atlas · WeatherSpark · Climate-Data.org &nbsp;|&nbsp; Generated: May 2026<br>
+    Gachibowli UHI data: Oorvani Foundation, IIIT-Hyderabad, Hyderabad Urban Lab (March 2024) · For academic and planning use.
+  </div>
+</footer>
+
+<script>
+// ─── RAINFALL BAR CHART ───────────────────────────────────────
+const rainData = [
+  { m:'JAN', r:10,  color:'#4da6ff', peak:false },
+  { m:'FEB', r:3,   color:'#4da6ff', peak:false },
+  { m:'MAR', r:13,  color:'#7ab8ff', peak:false },
+  { m:'APR', r:18,  color:'#f5a623', peak:false },
+  { m:'MAY', r:36,  color:'#f5a623', peak:false },
+  { m:'JUN', r:104, color:'#00b4a6', peak:false },
+  { m:'JUL', r:170, color:'#4da6ff', peak:false },
+  { m:'AUG', r:179, color:'#1e6fbf', peak:true  },
+  { m:'SEP', r:158, color:'#4da6ff', peak:false },
+  { m:'OCT', r:70,  color:'#f5a623', peak:false },
+  { m:'NOV', r:22,  color:'#7ab8ff', peak:false },
+  { m:'DEC', r:6,   color:'#4da6ff', peak:false },
+];
+
+const maxRain = Math.max(...rainData.map(d => d.r));
+const chart = document.getElementById('rainChart');
+const labelRow = document.getElementById('rainLabels');
+
+rainData.forEach((d, i) => {
+  const barH = Math.round((d.r / maxRain) * 180);
+  const group = document.createElement('div');
+  group.className = 'bar-group';
+
+  const bar = document.createElement('div');
+  bar.className = 'bar-rainfall';
+  bar.style.height = barH + 'px';
+  bar.style.background = d.peak
+    ? 'linear-gradient(180deg,#00d4ff,#1e6fbf)'
+    : `linear-gradient(180deg,${d.color}cc,${d.color}66)`;
+  bar.style.animationDelay = (i * 0.07) + 's';
+
+  const val = document.createElement('div');
+  val.className = 'bar-value';
+  val.textContent = d.r + 'mm';
+  bar.appendChild(val);
+
+  group.appendChild(bar);
+  chart.appendChild(group);
+
+  // label
+  const lbl = document.createElement('div');
+  lbl.className = 'bar-month-label';
+  lbl.style.cssText = 'flex:1;text-align:center;';
+  lbl.textContent = d.m;
+  labelRow.appendChild(lbl);
+});
+
+// ─── CLIMATE TABLE ────────────────────────────────────────────
+const monthData = [
+  { m:'January',   max:29, min:15.7, r:10,  days:1,   hum:63, sun:8.5, s:'❄️ Winter',       sc:'winter'  },
+  { m:'February',  max:32, min:17,   r:3,   days:1,   hum:51, sun:9.6, s:'❄️ Winter',       sc:'winter'  },
+  { m:'March',     max:35, min:20,   r:13,  days:2,   hum:39, sun:9.0, s:'☀️ Pre-Summer',   sc:'summer'  },
+  { m:'April',     max:37, min:23,   r:18,  days:3,   hum:37, sun:8.5, s:'☀️ Summer',       sc:'summer'  },
+  { m:'May',       max:39, min:26.2, r:36,  days:5,   hum:47, sun:8.8, s:'🔥 Peak Summer',  sc:'peak'    },
+  { m:'June',      max:34.5,min:24,  r:104, days:10,  hum:68, sun:5.5, s:'🌧️ Monsoon Onset',sc:'monsoon' },
+  { m:'July',      max:30.8,min:22,  r:170, days:17,  hum:72, sun:4.8, s:'🌧️ Peak Monsoon', sc:'monsoon' },
+  { m:'August',    max:29.8,min:22,  r:179, days:14,  hum:74, sun:4.6, s:'🌧️ Peak Monsoon', sc:'monsoon' },
+  { m:'September', max:30, min:22,   r:158, days:12,  hum:78, sun:5.8, s:'🌧️ Retreating M', sc:'monsoon' },
+  { m:'October',   max:32, min:20,   r:70,  days:7,   hum:65, sun:7.5, s:'🍂 Post-Monsoon', sc:'post'    },
+  { m:'November',  max:29, min:17,   r:22,  days:3,   hum:56, sun:8.2, s:'🍂 Post-Monsoon', sc:'post'    },
+  { m:'December',  max:28, min:14.5, r:6,   days:1,   hum:60, sun:8.8, s:'❄️ Winter',       sc:'winter'  },
+];
+
+const tbody = document.getElementById('climateTable');
+monthData.forEach((d, i) => {
+  const tr = document.createElement('tr');
+  tr.style.borderBottom = '1px solid rgba(255,255,255,0.04)';
+  tr.style.background = i % 2 === 0 ? 'rgba(255,255,255,0.01)' : 'transparent';
+  tr.style.transition = 'background 0.2s';
+  tr.addEventListener('mouseover', () => tr.style.background = 'rgba(245,166,35,0.06)');
+  tr.addEventListener('mouseout', () => tr.style.background = i % 2 === 0 ? 'rgba(255,255,255,0.01)' : 'transparent');
+
+  const maxColor = d.max >= 38 ? '#e84545' : d.max >= 34 ? '#f5a623' : '#e8f0fa';
+  const minColor = d.min <= 16 ? '#00d4ff' : '#8ca0bc';
+  const rainColor = d.r >= 100 ? '#4da6ff' : d.r >= 50 ? '#7ab8ff' : '#8ca0bc';
+
+  tr.innerHTML = `
+    <td style="padding:12px 16px;color:#e8f0fa;font-weight:500;">${d.m}</td>
+    <td style="padding:12px 16px;text-align:center;color:${maxColor};font-weight:600;">${d.max}°</td>
+    <td style="padding:12px 16px;text-align:center;color:${minColor};">${d.min}°</td>
+    <td style="padding:12px 16px;text-align:center;color:${rainColor};font-weight:${d.r>=100?'600':'400'};">${d.r}</td>
+    <td style="padding:12px 16px;text-align:center;color:var(--muted);">${d.days}</td>
+    <td style="padding:12px 16px;text-align:center;color:var(--muted);">${d.hum}%</td>
+    <td style="padding:12px 16px;text-align:center;color:var(--muted);">${d.sun}</td>
+    <td style="padding:12px 16px;color:var(--muted);">${d.s}</td>
+  `;
+  tbody.appendChild(tr);
+});
+</script>
+</body>
+</html>
